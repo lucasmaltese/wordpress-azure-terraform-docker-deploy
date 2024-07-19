@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: GAud4mZby8F3SD6P
+      MYSQL_DATABASE: LucasM_wordpress_db
+      MYSQL_USER: Lucas_Maltese
+      MYSQL_PASSWORD: Maltese14@
+
+  wordpress:
+    build: .
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: lucasM_user
+      WORDPRESS_DB_PASSWORD: Maltese14@
+      WORDPRESS_DB_NAME: LucasM_wordpress_db
+    depends_on:
+      - db
+
+volumes:
+  db_data:
